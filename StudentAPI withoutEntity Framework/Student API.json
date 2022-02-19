@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "41229fb1-ae58-4676-b255-f7af2078f973",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "view",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:63794/api/Students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63794",
+					"path": [
+						"api",
+						"Students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \r\n    \"StudName\": \"Dny\",\r\n    \"StudGender\": \"Male\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:63794/api/Students",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63794",
+					"path": [
+						"api",
+						"Students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:63794/api/Students/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "63794",
+					"path": [
+						"api",
+						"Students",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
