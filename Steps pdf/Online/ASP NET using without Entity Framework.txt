@@ -1,0 +1,126 @@
+Step 1: create new Project
+Step 2: ASP .NET Framwork(Application)
+Step 3: Name and select MVC project-create Project
+
+===========Build Project=========================
+Step 4: create database in SQL server Objects Exploer
+Step 5: 
+CREATE TABLE [dbo].[tbl_books] (
+    [BookID]     INT             IDENTITY (1, 1) NOT NULL,
+    [BookName]   VARCHAR (50)    NULL,
+    [BookAuthor] VARCHAR (50)    NULL,
+    [BookPrice]  DECIMAL (18, 2) NULL,
+    PRIMARY KEY CLUSTERED ([BookID] ASC)
+);
+
+GO EXPLOER:
+Add new Connection->Data Connection-->add new Connection
+Data source--MySQLServer--ServerNname--->(localdb)\MSSQLLocalDB
+Select databaseName:Webapi
+============================================================
+Step 6: Click right on Model-->Add class-->BookModel.cs
+step 7: add following properties
+
+namespace ACTSPaperWithoutEntity.Models
+{
+    public class BookModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int BookID { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Name")]
+        public string BookName { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Author")]
+        public string BookAuthor { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Please Enter Price")]
+        public decimal BookPrice { get; set; }
+
+    }
+}
+
+***************************************************
+if  error occcured use import statement
+
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+*****************************************************
+
+========================Buld project===============================
+Step 8: right click on Controller--Add
+       MVC--->Controller---->read/write action controller
+===============================================================
+Step 9:add Book controller
+
+
+create book:
+ public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Book/Create
+        [HttpPost]
+        public ActionResult Addbook(BookModel book)
+        {
+            try
+            {
+                SqlConnection cn = new SqlConnection();
+                cn.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JkJan22;Integrated Security=True";
+                cn.Open();
+                SqlCommand cmdInsert = new SqlCommand();
+                cmdInsert.Connection = cn;
+                cmdInsert.CommandType = System.Data.CommandType.Text;
+                cmdInsert.CommandText = "insert into tbl_books(BookName,BookAuthor,BookPrice) values(@BookName,@BookAuthor,@BookPrice)";
+
+                cmdInsert.Parameters.AddWithValue("@BookName", book.BookName);
+                cmdInsert.Parameters.AddWithValue("@BookAuthor", book.BookAuthor);
+                cmdInsert.Parameters.AddWithValue("@BookPrice", book.BookPrice);
+                cmdInsert.ExecuteNonQuery();
+                cn.Close();
+
+
+                return RedirectToAction("ShowBooks");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+IF error occcured use using:
+using System.Data.SqlClient;
+=========================================================		
+
+Step 9:Right click on --->add Book --->add view-->MVC view
+       select drop downlist--Create view-->Bookview
+	   Build ur project
+=============================================================
+
+Step 10: go app-start  RouteConfig
+
+ defaults: new { controller = "Book", action = "Index", id = UrlParameter.Optional }
+====================================================================================
+step 11:
+right click on index--->add view-->>select Empty with model view
+----------------------------------------------------------
+@model MvxAspWithoutEntity.Models.BookModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<h1>Welcome To Our App</h1>
+
+@Html.ActionLink("Add Books", "AddBook");
+@Html.ActionLink("Show Books", "ShowBooks");
+----------------------------------------------------------------
+===========================Entity view template select===============
+index:------>Empty
+showbook--Select "LIST" template
+Deatils---Details
+======================================================

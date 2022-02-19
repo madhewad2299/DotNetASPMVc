@@ -1,0 +1,48 @@
+C:\Users\Dnyaneshwar\Desktop\New folder\17.02.2022 notes webAPI manullay.cs 17 February 2022 11:54 PM
+============================================================
+WebBased API CAll
+============================================================
+Step 1: create new Project
+Step 2: ASP .NET Framwork(Application)
+Step 3: Name and selecr Web API create Project
+
+
+---------------Dhayan Kara--Build Your project-------------------
+step 4: create Databases and with Table Name
+
+CREATE TABLE [dbo].[Students] (
+    [StudId]     INT          IDENTITY (1, 1) NOT NULL,
+    [StudName]   VARCHAR (50) NOT NULL,
+    [StudGender] VARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([StudId] ASC)
+);
+
+
+------------------Build your project-----------------------------
+step 5: go to models---right click--add-student class file
+change in Student.cs
+public class Student
+{
+public int StudentId { get; set; }
+public string Name { get; set; }
+public int Marks{ get; set; }
+}
+---------------------------------------------------------------
+step 6: Add Controller---WEB API--WEBAPI Controll with read/write action
+StudentsController
+Step 7:
+public IEnumerable<Student> Get()
+{
+//return new string[] { "value1", "value2" };
+List<Student> lstStudents = new List<Student>();
+return lstStudents;
+}
+// GET: api/Students/5
+public Student Get(int id)
+{
+Student obj = new Student();
+//read from db
+return obj;
+}
+===================================================================
+-1-
