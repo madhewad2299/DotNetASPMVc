@@ -1,0 +1,17 @@
+CREATE PROCEDURE [dbo].[Insert]
+	@Name nvarchar(50),
+	@JavaMarks int,
+	@DotNetMarks int
+AS
+insert into Students values(@Name,@JavaMarks,@DotNetMarks)
+return 0;
+
+
+
+
+@{ 
+@Html.Partial("ViewP")
+}
+
+
+
